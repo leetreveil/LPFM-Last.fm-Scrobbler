@@ -1,0 +1,7 @@
+syntax: glob
+_ReSharper*
+bin
+obj
+Local.testsettings
+*.user
+*.suo

@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lpfm.LastFmScrobbler", "LastFmScrobbler\Lpfm.LastFmScrobbler.csproj", "{BA7F7E8A-B089-4323-8C8D-F406E7AFCDBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lpfm.LastFmScrobbler.Tests", "LastFmScrobbler\Tests\Lpfm.LastFmScrobbler.Tests.csproj", "{11C69C48-C6F4-4878-8048-F88216A0B752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lpfm.LastFmScrobbler.Tests.Integration", "LastFmScrobbler\Tests\Integration\Lpfm.LastFmScrobbler.Tests.Integration.csproj", "{7803438E-AE7E-481D-AED6-2DCAB35B8FEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6CBD8170-78DF-4761-9A19-5ED2B9D3DBC4}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Lpfm.LastFmScrobbler.vsmdi = Lpfm.LastFmScrobbler.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Lpfm.LastFmScrobbler.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA7F7E8A-B089-4323-8C8D-F406E7AFCDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA7F7E8A-B089-4323-8C8D-F406E7AFCDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA7F7E8A-B089-4323-8C8D-F406E7AFCDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA7F7E8A-B089-4323-8C8D-F406E7AFCDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C69C48-C6F4-4878-8048-F88216A0B752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C69C48-C6F4-4878-8048-F88216A0B752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C69C48-C6F4-4878-8048-F88216A0B752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C69C48-C6F4-4878-8048-F88216A0B752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7803438E-AE7E-481D-AED6-2DCAB35B8FEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7803438E-AE7E-481D-AED6-2DCAB35B8FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7803438E-AE7E-481D-AED6-2DCAB35B8FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7803438E-AE7E-481D-AED6-2DCAB35B8FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
