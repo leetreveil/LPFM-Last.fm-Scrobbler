@@ -1,7 +1,9 @@
 syntax: glob
 _ReSharper*
-bin
+bin\Debug
 obj
 Local.testsettings
 *.user
 *.suo
+App.config.local
+*.pdb
