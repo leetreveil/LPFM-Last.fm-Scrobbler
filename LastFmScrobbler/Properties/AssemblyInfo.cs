@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Lpfm.LastFmScrobbler")]
-[assembly: AssemblyDescription("A Last.FM Scrobbler library")]
+[assembly: AssemblyDescription("A Last.fm Scrobbler library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LPFM")]
 [assembly: AssemblyProduct("Lpfm.LastFmScrobbler")]
