@@ -7,3 +7,5 @@ Local.testsettings
 *.suo
 App.config.local
 *.pdb
+Tests/bin
+Tests/Integration/bin

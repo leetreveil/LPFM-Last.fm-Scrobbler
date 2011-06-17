@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Lpfm.LastFmScrobbler.dll</id>
+    <version>1.0</version>
+    <authors>DanielLarsenNZ</authors>
+    <owners>DanielLarsenNZ</owners>
+    <licenseUrl>http://lpfm.codeplex.com/license</licenseUrl>
+    <projectUrl>http://lpfm.codeplex.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>LPFM Last.fm Scrobbler is a simple .NET API library for scrobbling to the Last.fm web service</description>
+    <tags>lpfm last.fm scrobbler api webservice .net</tags>
+  </metadata>
+</package>
