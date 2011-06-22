@@ -405,44 +405,6 @@
             Fetch a session key for a user
             </summary>
         </member>
-        <member name="T:Lpfm.LastFmScrobbler.AsyncScrobbler">
-            <summary>
-            An Asynchronous Scrobbler object for "scrobbling" music track plays to the Last.fm web service
-            </summary>
-        </member>
-        <member name="M:Lpfm.LastFmScrobbler.AsyncScrobbler.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Instantiates an instance of an <see cref="T:Lpfm.LastFmScrobbler.AsyncScrobbler"/>
-            </summary>
-            <param name="apiKey">Required. An API Key from Last.fm. See http://www.last.fm/api/account </param>
-            <param name="apiSecret">Required. An API Secret from Last.fm. See http://www.last.fm/api/account </param>
-            <param name="sessionKey">Required. An authorized Last.fm Session Key. See <see cref="M:Lpfm.LastFmScrobbler.Scrobbler.GetSession"/></param>
-            <exception cref="T:System.ArgumentNullException"/>
-        </member>
-        <member name="M:Lpfm.LastFmScrobbler.AsyncScrobbler.NowPlaying(Lpfm.LastFmScrobbler.Track)">
-            <summary>
-            Enqueues a NowPlaying request but does not send it. Call <see cref="M:Lpfm.LastFmScrobbler.AsyncScrobbler.Process(System.Boolean)"/> to send
-            </summary>
-            <param name="track">The <see cref="T:Lpfm.LastFmScrobbler.Track"/> that is now playing</param>
-            <remarks>This method is thread-safe. Will not check for invalid tracks until Processed. You should validate the Track before calling NowPlaying</remarks>
-        </member>
-        <member name="M:Lpfm.LastFmScrobbler.AsyncScrobbler.Scrobble(Lpfm.LastFmScrobbler.Track)">
-            <summary>
-            Enqueues a Srobble request but does not send it. Call <see cref="M:Lpfm.LastFmScrobbler.AsyncScrobbler.Process(System.Boolean)"/> to send
-            </summary>
-            <param name="track">The <see cref="T:Lpfm.LastFmScrobbler.Track"/> that has played</param>
-            <remarks>This method is thread-safe. Will not check for invalid tracks until Processed. You should validate the Track before calling Scrobble</remarks>
-        </member>
-        <member name="M:Lpfm.LastFmScrobbler.AsyncScrobbler.Process(System.Boolean)">
-            <summary>
-            Synchronously processes all scrobbles and now playing notifications that are in the Queues, and returns the results
-            </summary>
-            <param name="throwExceptionDuringProcess">When true, will throw the first Exception encountered during Scrobbling (and cease to process). 
-            When false, any exceptions raised will be attached to the corresponding <see cref="T:Lpfm.LastFmScrobbler.ScrobbleResponse"/>, but will not be thrown. Default is false.</param>
-            <returns><see cref="T:Lpfm.LastFmScrobbler.ScrobbleResponses"/>, a list of <see cref="T:Lpfm.LastFmScrobbler.ScrobbleResponse"/> </returns>
-            <remarks>This method will complete synchronously and may take some time. This should be invoked by a single timer. This 
-            method may not be thread safe</remarks>
-        </member>
         <member name="M:Lpfm.LastFmScrobbler.Api.TrackApi.#ctor">
             <summary>
             Instantiates a <see cref="T:Lpfm.LastFmScrobbler.Api.TrackApi"/>
@@ -605,6 +567,46 @@
             <summary>
             When the token was created
             </summary>
+        </member>
+        <member name="T:Lpfm.LastFmScrobbler.QueuingScrobbler">
+            <summary>
+            A Scrobbler object that scrobbles to a queue until the application is ready to process
+            </summary>
+            <remarks>Use this version of the Scrobbler as a helper for asynchronous scrobbling</remarks>
+            
+        </member>
+        <member name="M:Lpfm.LastFmScrobbler.QueuingScrobbler.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Instantiates an instance of a <see cref="T:Lpfm.LastFmScrobbler.QueuingScrobbler"/>
+            </summary>
+            <param name="apiKey">Required. An API Key from Last.fm. See http://www.last.fm/api/account </param>
+            <param name="apiSecret">Required. An API Secret from Last.fm. See http://www.last.fm/api/account </param>
+            <param name="sessionKey">Required. An authorized Last.fm Session Key. See <see cref="M:Lpfm.LastFmScrobbler.Scrobbler.GetSession"/></param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Lpfm.LastFmScrobbler.QueuingScrobbler.NowPlaying(Lpfm.LastFmScrobbler.Track)">
+            <summary>
+            Enqueues a NowPlaying request but does not send it. Call <see cref="M:Lpfm.LastFmScrobbler.QueuingScrobbler.Process(System.Boolean)"/> to send
+            </summary>
+            <param name="track">The <see cref="T:Lpfm.LastFmScrobbler.Track"/> that is now playing</param>
+            <remarks>This method is thread-safe. Will not check for invalid tracks until Processed. You should validate the Track before calling NowPlaying</remarks>
+        </member>
+        <member name="M:Lpfm.LastFmScrobbler.QueuingScrobbler.Scrobble(Lpfm.LastFmScrobbler.Track)">
+            <summary>
+            Enqueues a Srobble request but does not send it. Call <see cref="M:Lpfm.LastFmScrobbler.QueuingScrobbler.Process(System.Boolean)"/> to send
+            </summary>
+            <param name="track">The <see cref="T:Lpfm.LastFmScrobbler.Track"/> that has played</param>
+            <remarks>This method is thread-safe. Will not check for invalid tracks until Processed. You should validate the Track before calling Scrobble</remarks>
+        </member>
+        <member name="M:Lpfm.LastFmScrobbler.QueuingScrobbler.Process(System.Boolean)">
+            <summary>
+            Synchronously processes all scrobbles and now playing notifications that are in the Queues, and returns the results
+            </summary>
+            <param name="throwExceptionDuringProcess">When true, will throw the first Exception encountered during Scrobbling (and cease to process). 
+            When false, any exceptions raised will be attached to the corresponding <see cref="T:Lpfm.LastFmScrobbler.ScrobbleResponse"/>, but will not be thrown. Default is false.</param>
+            <returns><see cref="T:Lpfm.LastFmScrobbler.ScrobbleResponses"/>, a list of <see cref="T:Lpfm.LastFmScrobbler.ScrobbleResponse"/> </returns>
+            <remarks>This method will complete synchronously and may take some time. This should be invoked by a single timer. This 
+            method may not be thread safe</remarks>
         </member>
     </members>
 </doc>

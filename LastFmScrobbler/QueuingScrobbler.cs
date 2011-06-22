@@ -5,9 +5,11 @@ using System.Collections.Generic;
 namespace Lpfm.LastFmScrobbler
 {
     /// <summary>
-    /// An Asynchronous Scrobbler object for "scrobbling" music track plays to the Last.fm web service
+    /// A Scrobbler object that scrobbles to a queue until the application is ready to process
     /// </summary>
-    public class AsyncScrobbler
+    /// <remarks>Use this version of the Scrobbler as a helper for asynchronous scrobbling</remarks>
+    /// 
+    public class QueuingScrobbler
     {
         private ConcurrentQueue<Track> ScrobbleQueue { get; set; }
         private ConcurrentQueue<Track> NowPlayingQueue { get; set; }
@@ -17,13 +19,13 @@ namespace Lpfm.LastFmScrobbler
         private string SessionKey { get; set; }
 
         /// <summary>
-        /// Instantiates an instance of an <see cref="AsyncScrobbler"/>
+        /// Instantiates an instance of a <see cref="QueuingScrobbler"/>
         /// </summary>
         /// <param name="apiKey">Required. An API Key from Last.fm. See http://www.last.fm/api/account </param>
         /// <param name="apiSecret">Required. An API Secret from Last.fm. See http://www.last.fm/api/account </param>
         /// <param name="sessionKey">Required. An authorized Last.fm Session Key. See <see cref="Scrobbler.GetSession"/></param>
         /// <exception cref="ArgumentNullException"/>
-        public AsyncScrobbler(string apiKey, string apiSecret, string sessionKey)
+        public QueuingScrobbler(string apiKey, string apiSecret, string sessionKey)
         {
             if (string.IsNullOrEmpty(apiKey)) throw new ArgumentNullException("apiKey");
             if (string.IsNullOrEmpty(apiSecret)) throw new ArgumentNullException("apiSecret");

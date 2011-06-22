@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Timers;
 using System.Windows.Forms;
 using AxWMPLib;
 using Lpfm.LastFmScrobbler;
@@ -8,7 +7,6 @@ using Lpfm.LastFmScrobbler.Api;
 using Microsoft.Win32;
 using TagLib;
 using WMPLib;
-using Timer = System.Timers.Timer;
 
 namespace LastFmScrobbler.SampleApplication
 {
@@ -20,8 +18,7 @@ namespace LastFmScrobbler.SampleApplication
         private const string ApiKey = "";
         private const string ApiSecret = "";
 
-        private readonly Timer _controllerTimer;
-        private readonly AsyncScrobbler _scrobbler;
+        private readonly QueuingScrobbler _scrobbler;
 
         public PlayerForm()
         {
@@ -39,12 +36,8 @@ namespace LastFmScrobbler.SampleApplication
                 string sessionKey = GetSessionKey();
 
                 // instantiate the async scrobbler
-                _scrobbler = new AsyncScrobbler(ApiKey, ApiSecret, sessionKey);
+                _scrobbler = new QueuingScrobbler(ApiKey, ApiSecret, sessionKey);
 
-                // create a thread safe Timer that processess any outstanding scrobbles every 2 seconds
-                _controllerTimer = new Timer(2000) {AutoReset = true};
-                _controllerTimer.Elapsed += ControllerTimer_Elapsed;
-                _controllerTimer.Enabled = true;
             }
             catch (Exception exception)
             {
@@ -53,19 +46,6 @@ namespace LastFmScrobbler.SampleApplication
         }
 
         private Track CurrentTrack { get; set; }
-
-        private void ControllerTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            try
-            {
-                _scrobbler.Process();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-            
-        }
 
         private static string GetSessionKey()
         {
@@ -127,10 +107,21 @@ namespace LastFmScrobbler.SampleApplication
             }
         }
 
+        private delegate void ProcessScrobblesDelegate();
+
+        private void ProcessScrobbles()
+        {
+            // Processes the scrobbles and discards any responses. This could be improved with thread-safe
+            //  logging and/or error handling
+            _scrobbler.Process();
+        }
+
         private void WindowsMediaPlayer_PlayStateChange(object sender, _WMPOCXEvents_PlayStateChangeEvent e)
         {
             try
             {
+                var doProcessScrobbles = new ProcessScrobblesDelegate(ProcessScrobbles);
+
                 switch (WindowsMediaPlayer.playState)
                 {
                     case WMPPlayState.wmppsPlaying:
@@ -140,14 +131,18 @@ namespace LastFmScrobbler.SampleApplication
                         CurrentTrack = WmpMediaToTrack(WindowsMediaPlayer.currentMedia);
                         CurrentTrack.WhenStartedPlaying = DateTime.Now;
 
-                        // we are using the Async scrobbler here so that we don't block the form while the scrobble request is being sent
-                        //  to the Last.fm web service. The request will be sent when the Process() method is called by the _controllerTimer event
+                        // we are using the Queuing scrobbler here so that we don't block the form while the scrobble request is being sent
+                        //  to the Last.fm web service. The request will be sent when the Process() method is invoked
                         _scrobbler.NowPlaying(CurrentTrack);
+                        // Begin invoke with no callback fires and forgets the scrobbler process. Processing runs asynchronously while 
+                        //  the form thread continues
+                        doProcessScrobbles.BeginInvoke(null, null);
                         break;
 
                     case WMPPlayState.wmppsMediaEnded:
                         // Scrobble the track that just finished
                         _scrobbler.Scrobble(CurrentTrack);
+                        doProcessScrobbles.BeginInvoke(null, null);
                         break;
                 }
 

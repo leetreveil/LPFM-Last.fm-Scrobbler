@@ -51,7 +51,7 @@
     <Compile Include="Api\AuthApi.cs" />
     <Compile Include="Api\LastFmApiException.cs" />
     <Compile Include="Api\TrackApi.cs" />
-    <Compile Include="AsyncScrobbler.cs" />
+    <Compile Include="QueuingScrobbler.cs" />
     <Compile Include="AuthenticationToken.cs" />
     <Compile Include="Authentication.cs" />
     <Compile Include="CorrectedTrack.cs" />

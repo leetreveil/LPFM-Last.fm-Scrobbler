@@ -35,8 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lpfm.LastFmScrobbler">
-      <HintPath>packages\Lpfm.LastFmScrobbler.dll.1.1\lib\NET40\Lpfm.LastFmScrobbler.dll</HintPath>
+    <Reference Include="Lpfm.LastFmScrobbler, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lpfm.LastFmScrobbler.dll.1.2\lib\NET40\Lpfm.LastFmScrobbler.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
