@@ -107,6 +107,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="license.txt" />
     <Content Include="TagLibSharp\COPYING.txt" />
     <Content Include="TagLibSharp\taglib-sharp.dll" />
   </ItemGroup>
