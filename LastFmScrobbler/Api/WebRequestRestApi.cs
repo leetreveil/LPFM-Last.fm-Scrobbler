@@ -33,7 +33,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// <param name="url">A fully qualified URL</param>
         /// <param name="queryItems">A Dictionary of request query items</param>
         /// <returns>A read-only XPath queryable <see cref="XPathNavigator"/></returns>
-        public XPathNavigator SendGetRequest(string url, Dictionary<string, string> queryItems)
+        public XPathNavigator SendGetRequest(string url, SortedDictionary<string, string> queryItems)
         {
             if (string.IsNullOrEmpty(url)) throw new ArgumentNullException("url");
             if (queryItems == null) throw new ArgumentNullException("queryItems");
@@ -56,7 +56,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// <param name="formItems">A <see cref="NameValueCollection"/> of name-value pairs to post in the body of the request</param>
         /// <returns>A read-only XPath queryable <see cref="XPathNavigator"/></returns>
         /// <remarks>Will synchronously HTTP POST a application/x-www-form-urlencoded request</remarks>
-        public XPathNavigator SendPostRequest(string url, Dictionary<string, string> formItems)
+        public XPathNavigator SendPostRequest(string url, SortedDictionary<string, string> formItems)
         {
             if (string.IsNullOrEmpty(url)) throw new ArgumentNullException("url");
             if (formItems == null) throw new ArgumentNullException("formItems");
@@ -106,7 +106,7 @@ namespace Lpfm.LastFmScrobbler.Api
 
         #endregion
 
-        protected virtual string BuildStringOfItems(Dictionary<string, string> queryItems)
+        protected virtual string BuildStringOfItems(SortedDictionary<string, string> queryItems)
         {
             var builder = new StringBuilder();
 

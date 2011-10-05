@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Xml.XPath;
 
 namespace Lpfm.LastFmScrobbler.Api
@@ -55,7 +53,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// unless they have been explicitly approved by the user</remarks>
         public NowPlayingResponse UpdateNowPlaying(Track track, Authentication authentication)
         {
-            Dictionary<string, string> parameters = TrackToNameValueCollection(track);
+            SortedDictionary<string, string> parameters = TrackToNameValueCollection(track);
 
             ApiHelper.AddRequiredParams(parameters, UpdateNowPlayingMethodName, authentication);
 
@@ -73,7 +71,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// <returns>A <see cref="ScrobbleResponse"/>DTO containing details of Last.FM's response</returns>
         public ScrobbleResponse Scrobble(Track track, Authentication authentication)
         {
-            Dictionary<string, string> parameters = TrackToNameValueCollection(track);
+            SortedDictionary<string, string> parameters = TrackToNameValueCollection(track);
 
             ApiHelper.AddRequiredParams(parameters, ScrobbleMethodName, authentication);
 
@@ -124,7 +122,7 @@ namespace Lpfm.LastFmScrobbler.Api
         {
             var responses = GetScrobbleResponsesFromNavigator(navigator);
             if (responses.Count > 1) throw new InvalidOperationException("More than one scrobble response returned. One or zero expected");
-            return responses.FirstOrDefault();
+            return responses[0];
         }
 
         protected ScrobbleResponses GetScrobbleResponsesFromNavigator(XPathNavigator navigator)
@@ -182,11 +180,9 @@ namespace Lpfm.LastFmScrobbler.Api
             return track;
         }
 
-        protected virtual Dictionary<string, string> TrackToNameValueCollection(Track track)
+        protected virtual SortedDictionary<string, string> TrackToNameValueCollection(Track track)
         {
-            var nameValues = new Dictionary<string, string>();
-
-            Validator.ValidateObject(track, new ValidationContext(track, null, null));
+            var nameValues = new SortedDictionary<string, string>();
 
             nameValues.Add(Track.ArtistNameParamName, track.ArtistName);
             nameValues.Add(Track.TrackNameParamName, track.TrackName);

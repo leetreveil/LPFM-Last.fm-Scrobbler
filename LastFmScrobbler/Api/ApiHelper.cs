@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,7 +25,7 @@ namespace Lpfm.LastFmScrobbler.Api
         public const string SessionKeyParamName = "sk";
 
         /// <summary>
-        /// Check the Last.fm status of the response and throw a <see cref="LastFmApiException"/> if an error is detected
+        /// Check the Last.fm status of the response     and throw a <see cref="LastFmApiException"/> if an error is detected
         /// </summary>
         /// <param name="navigator">The response as <see cref="XPathNavigator"/></param>
         /// <exception cref="LastFmApiException"/>
@@ -66,7 +65,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// <summary>
         /// Adds the parameters that are required by the Last.Fm API to the <see cref="parameters"/> dictionary
         /// </summary>
-        public static void AddRequiredParams(Dictionary<string, string> parameters, string methodName, Authentication authentication, bool addApiSignature = true)
+        public static void AddRequiredParams(SortedDictionary<string, string> parameters, string methodName, Authentication authentication, bool addApiSignature = true)
         {
             // method
             parameters.Add(MethodParamName, methodName);
@@ -87,9 +86,9 @@ namespace Lpfm.LastFmScrobbler.Api
         /// <summary>
         /// Generates a hashed Last.fm API Signature from the parameter name-value pairs, and the API secret
         /// </summary>
-        public static string GetApiSignature(Dictionary<string, string> nameValues, string apiSecret)
+        public static string GetApiSignature(SortedDictionary<string, string> nameValues, string apiSecret)
         {
-            string parameters = GetStringOfOrderedParamsForHashing(nameValues);
+            string parameters = FormatParamsForHashing(nameValues);
             parameters += apiSecret;
 
             return Hash(parameters);
@@ -98,11 +97,11 @@ namespace Lpfm.LastFmScrobbler.Api
         /// <summary>
         /// Gets a string of ordered parameter values for hashing
         /// </summary>
-        public static string GetStringOfOrderedParamsForHashing(Dictionary<string, string> nameValues)
+        public static string FormatParamsForHashing(SortedDictionary<string, string> nameValues)
         {
             var paramsBuilder = new StringBuilder();
 
-            foreach (KeyValuePair<string, string> nameValue in nameValues.OrderBy(nv => nv.Key))
+            foreach (KeyValuePair<string, string> nameValue in nameValues)
             {
                 paramsBuilder.Append(string.Format("{0}{1}", nameValue.Key, nameValue.Value));
             }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace Lpfm.LastFmScrobbler
 {
@@ -51,13 +50,11 @@ namespace Lpfm.LastFmScrobbler
         /// <summary>
         /// Required. The track name
         /// </summary>
-        [Required]
         public string TrackName { get; set; }
 
         /// <summary>
         /// Required. The artist name
         /// </summary>
-        [Required]
         public string ArtistName { get; set; }
         
         /// <summary>

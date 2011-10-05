@@ -49,7 +49,7 @@ namespace Lpfm.LastFmScrobbler.Tests.Api
         public void GetStringOfOrderedParamsForHashing_TestValues_ReturnsOrderedString()
         {
             // Arrange
-            var values = new Dictionary<string, string>
+            var values = new SortedDictionary<string, string>
                              {
                                  {"A", "B"},
                                  {"1", "2"},
@@ -59,7 +59,7 @@ namespace Lpfm.LastFmScrobbler.Tests.Api
             const string expectedResult = "12ABCD";
 
             // Act
-            string result = ApiHelper.GetStringOfOrderedParamsForHashing(values);
+            string result = ApiHelper.FormatParamsForHashing(values);
 
             // Assert
             Assert.AreEqual(expectedResult, result);
@@ -69,7 +69,7 @@ namespace Lpfm.LastFmScrobbler.Tests.Api
         public void GetApiSignature_TestValues_Returns32ByteHash()
         {
             // Arrange
-            var values = new Dictionary<string, string>
+            var values = new SortedDictionary<string, string>
                              {
                                  {ApiHelper.ApiKeyParamName, ApiKey},
                                  {ApiHelper.MethodParamName, AuthApi.GetSessionMethodName},

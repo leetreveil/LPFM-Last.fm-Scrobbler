@@ -31,7 +31,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// </summary>
         public AuthenticationToken GetToken(Authentication authentication)
         {
-            var parameters = new Dictionary<string, string>();
+            var parameters = new SortedDictionary<string, string>();
             ApiHelper.AddRequiredParams(parameters, GetTokenMethodName, authentication, false);
 
             var navigator = RestApi.SendGetRequest(ApiHelper.LastFmWebServiceRootUrl, parameters);
@@ -45,7 +45,7 @@ namespace Lpfm.LastFmScrobbler.Api
         /// </summary>
         public void GetSession(Authentication authentication, AuthenticationToken token)
         {
-            var parameters = new Dictionary<string, string>();
+            var parameters = new SortedDictionary<string, string>();
             parameters.Add("token", token.Value);
 
             ApiHelper.AddRequiredParams(parameters, GetSessionMethodName, authentication);

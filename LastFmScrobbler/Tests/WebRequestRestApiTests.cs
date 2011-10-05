@@ -20,7 +20,7 @@ namespace Lpfm.LastFmScrobbler.Tests
             // Arrange
             const string method = "GET";
             const string uri = "http://foo.bar/";
-            var queryItems = new Dictionary<string, string>();
+            var queryItems = new SortedDictionary<string, string>();
 
             var api = new WebRequestRestApiUnderTest();
 
@@ -35,7 +35,7 @@ namespace Lpfm.LastFmScrobbler.Tests
         [TestMethod]
         public void BuildStringOfItems_TestQueryItems_StringContainsItemsInExpectedFormat()
         {
-            var queryItems = new Dictionary<string, string> {{"TestKey1", "TestValue1"}, {"TestKey2", "TestValue2"}};
+            var queryItems = new SortedDictionary<string, string> { { "TestKey1", "TestValue1" }, { "TestKey2", "TestValue2" } };
 
             var api = new WebRequestRestApiUnderTest();
 
@@ -46,7 +46,7 @@ namespace Lpfm.LastFmScrobbler.Tests
             Assert.AreEqual(queryString, FormatQueryItemsAsQueryString(queryItems));
         }
 
-        private static string FormatQueryItemsAsQueryString(Dictionary<string, string> queryItems)
+        private static string FormatQueryItemsAsQueryString(SortedDictionary<string, string> queryItems)
         {
             var builder = new StringBuilder();
 
@@ -91,7 +91,7 @@ namespace Lpfm.LastFmScrobbler.Tests
             return MockXPathNavigator.Object;
         }
 
-        public string BuildStringOfItemsUnderTest(Dictionary<string, string> queryItems)
+        public string BuildStringOfItemsUnderTest(SortedDictionary<string, string> queryItems)
         {
             return BuildStringOfItems(queryItems);
         }

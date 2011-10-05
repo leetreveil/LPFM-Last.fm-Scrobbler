@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lpfm.LastFmScrobbler</RootNamespace>
     <AssemblyName>Lpfm.LastFmScrobbler</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -35,12 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -51,7 +46,6 @@
     <Compile Include="Api\AuthApi.cs" />
     <Compile Include="Api\LastFmApiException.cs" />
     <Compile Include="Api\TrackApi.cs" />
-    <Compile Include="QueuingScrobbler.cs" />
     <Compile Include="AuthenticationToken.cs" />
     <Compile Include="Authentication.cs" />
     <Compile Include="CorrectedTrack.cs" />
